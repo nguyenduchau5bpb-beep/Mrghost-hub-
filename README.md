@@ -1,2 +1,0 @@
-# Mrghost-hub-
-Roblox, script
