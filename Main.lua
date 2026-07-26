@@ -1,8 +1,8 @@
 -- [[ 1. THÔNG BÁO BẮT ĐẦU LOAD SCRIPT ]]
 pcall(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "★ MRGHOST HUB VIP ★",
-        Text = "Đang tải giao diện Premium Cyberpunk...",
+        Title = "★ MRGHOST HUB WIBU VIP ★",
+        Text = "Đang tải giao diện Ma Anime/Chibi VIP...",
         Duration = 3
     })
 end)
@@ -19,26 +19,26 @@ local LocalPlayer = Players.LocalPlayer
 
 -- ScreenGui Container
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "MrGhostHub_VIP_UI"
+ScreenGui.Name = "MrGhostHub_Wibu_UI"
 ScreenGui.Parent = (gethui and gethui()) or CoreGui or LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ResetOnSpawn = false
 
 -- Helper RGB Dynamic Color
 local function getRGBColor(speed)
-    speed = speed or 4
+    speed = speed or 3
     local hue = (tick() % speed) / speed
     return Color3.fromHSV(hue, 0.85, 1)
 end
 
 -- =========================================================
--- MAIN FRAME (CYBERPUNK GLASSES)
+-- MAIN FRAME (CYBERPUNK WIBU GLASSES)
 -- =========================================================
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Size = UDim2.new(0, 340, 0, 200)
 MainFrame.Position = UDim2.new(0.5, -170, 0.4, -100)
-MainFrame.BackgroundColor3 = Color3.fromRGB(12, 12, 18)
-MainFrame.BackgroundTransparency = 0.15
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 12, 22)
+MainFrame.BackgroundTransparency = 0.12
 MainFrame.BorderSizePixel = 0
 MainFrame.ClipsDescendants = false
 MainFrame.Parent = ScreenGui
@@ -47,19 +47,19 @@ local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 18)
 MainCorner.Parent = MainFrame
 
--- Viền LED Neon Glow kép
+-- Viền LED Neon Glow
 local UIStroke = Instance.new("UIStroke")
 UIStroke.Thickness = 2.5
 UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 UIStroke.Parent = MainFrame
 
 -- =========================================================
--- TITLE HEADER
+-- TITLE HEADER (STYLE WIBU)
 -- =========================================================
 local TitleBar = Instance.new("Frame")
 TitleBar.Name = "TitleBar"
 TitleBar.Size = UDim2.new(1, 0, 0, 50)
-TitleBar.BackgroundColor3 = Color3.fromRGB(18, 18, 28)
+TitleBar.BackgroundColor3 = Color3.fromRGB(22, 16, 32)
 TitleBar.BackgroundTransparency = 0.2
 TitleBar.BorderSizePixel = 0
 TitleBar.Parent = MainFrame
@@ -71,7 +71,7 @@ TitleBarCorner.Parent = TitleBar
 local TitleBarFix = Instance.new("Frame")
 TitleBarFix.Size = UDim2.new(1, 0, 0, 12)
 TitleBarFix.Position = UDim2.new(0, 0, 1, -12)
-TitleBarFix.BackgroundColor3 = Color3.fromRGB(18, 18, 28)
+TitleBarFix.BackgroundColor3 = Color3.fromRGB(22, 16, 32)
 TitleBarFix.BackgroundTransparency = 0.2
 TitleBarFix.BorderSizePixel = 0
 TitleBarFix.Parent = TitleBar
@@ -80,17 +80,17 @@ local Title = Instance.new("TextLabel")
 Title.Name = "Title"
 Title.Size = UDim2.new(1, 0, 1, 0)
 Title.BackgroundTransparency = 1
-Title.Text = "👻  MRGHOST HUB VIP  👻"
+Title.Text = "★  MRGHOST HUB WIBU  ★"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 19
+Title.TextSize = 18
 Title.Font = Enum.Font.FredokaOne
 Title.Parent = TitleBar
 
 local TitleGradient = Instance.new("UIGradient")
 TitleGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 240, 255)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 0, 180)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 255, 150))
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 150)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 240, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 200, 0))
 }
 TitleGradient.Parent = Title
 
@@ -105,7 +105,7 @@ Separator.Parent = MainFrame
 local SepGradient = Instance.new("UIGradient")
 SepGradient.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 240, 255)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 0, 180)),
     ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))
 }
 SepGradient.Parent = Separator
@@ -122,7 +122,7 @@ Container.Parent = MainFrame
 local LightCard = Instance.new("Frame")
 LightCard.Name = "LightCard"
 LightCard.Size = UDim2.new(1, 0, 1, 0)
-LightCard.BackgroundColor3 = Color3.fromRGB(22, 22, 34)
+LightCard.BackgroundColor3 = Color3.fromRGB(26, 20, 36)
 LightCard.BackgroundTransparency = 0.3
 LightCard.Parent = Container
 
@@ -132,7 +132,7 @@ CardCorner.Parent = LightCard
 
 local CardStroke = Instance.new("UIStroke")
 CardStroke.Thickness = 1.5
-CardStroke.Color = Color3.fromRGB(50, 50, 75)
+CardStroke.Color = Color3.fromRGB(65, 45, 85)
 CardStroke.Parent = LightCard
 
 -- Label Full Light
@@ -140,7 +140,7 @@ local CardLabel = Instance.new("TextLabel")
 CardLabel.Size = UDim2.new(0.6, 0, 0, 45)
 CardLabel.Position = UDim2.new(0, 14, 0, 2)
 CardLabel.BackgroundTransparency = 1
-CardLabel.Text = "⚡  Full Light Mode"
+CardLabel.Text = "🌸  Full Light Mode"
 CardLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 CardLabel.TextSize = 16
 CardLabel.Font = Enum.Font.FredokaOne
@@ -152,7 +152,7 @@ local SwitchBg = Instance.new("TextButton")
 SwitchBg.Name = "SwitchBg"
 SwitchBg.Size = UDim2.new(0, 50, 0, 26)
 SwitchBg.Position = UDim2.new(1, -64, 0, 12)
-SwitchBg.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+SwitchBg.BackgroundColor3 = Color3.fromRGB(45, 35, 60)
 SwitchBg.Text = ""
 SwitchBg.AutoButtonColor = false
 SwitchBg.Parent = LightCard
@@ -165,7 +165,7 @@ local SwitchDot = Instance.new("Frame")
 SwitchDot.Name = "SwitchDot"
 SwitchDot.Size = UDim2.new(0, 20, 0, 20)
 SwitchDot.Position = UDim2.new(0, 3, 0.5, -10)
-SwitchDot.BackgroundColor3 = Color3.fromRGB(150, 150, 170)
+SwitchDot.BackgroundColor3 = Color3.fromRGB(170, 150, 190)
 SwitchDot.Parent = SwitchBg
 
 local DotCorner = Instance.new("UICorner")
@@ -173,7 +173,7 @@ DotCorner.CornerRadius = UDim.new(1, 0)
 DotCorner.Parent = SwitchDot
 
 -- =========================================================
--- SLIDER CYBERPUNK
+-- SLIDER CYBERPUNK WIBU
 -- =========================================================
 local SliderValLabel = Instance.new("TextLabel")
 SliderValLabel.Name = "SliderValLabel"
@@ -181,7 +181,7 @@ SliderValLabel.Size = UDim2.new(1, -28, 0, 20)
 SliderValLabel.Position = UDim2.new(0, 14, 0, 50)
 SliderValLabel.BackgroundTransparency = 1
 SliderValLabel.Text = "Cường độ sáng:  4.0  (40%)"
-SliderValLabel.TextColor3 = Color3.fromRGB(0, 240, 255)
+SliderValLabel.TextColor3 = Color3.fromRGB(255, 120, 220)
 SliderValLabel.TextSize = 13
 SliderValLabel.Font = Enum.Font.SourceSansBold
 SliderValLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -191,7 +191,7 @@ local SliderFrame = Instance.new("Frame")
 SliderFrame.Name = "SliderFrame"
 SliderFrame.Size = UDim2.new(1, -28, 0, 16)
 SliderFrame.Position = UDim2.new(0, 14, 0, 78)
-SliderFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 25)
+SliderFrame.BackgroundColor3 = Color3.fromRGB(20, 15, 30)
 SliderFrame.Parent = LightCard
 
 local SliderFrameCorner = Instance.new("UICorner")
@@ -201,7 +201,7 @@ SliderFrameCorner.Parent = SliderFrame
 local SliderFill = Instance.new("Frame")
 SliderFill.Name = "SliderFill"
 SliderFill.Size = UDim2.new(0.4, 0, 1, 0)
-SliderFill.BackgroundColor3 = Color3.fromRGB(0, 240, 255)
+SliderFill.BackgroundColor3 = Color3.fromRGB(255, 0, 180)
 SliderFill.Parent = SliderFrame
 
 local SliderFillCorner = Instance.new("UICorner")
@@ -216,25 +216,36 @@ SliderBtn.Text = ""
 SliderBtn.Parent = SliderFrame
 
 -- =========================================================
--- FLOATING TOGGLE BUTTON (Nút con ma 👻)
+-- FLOATING TOGGLE BUTTON (NÚT MA ANIME CHIBI WIBU 👻)
 -- =========================================================
-local ToggleMenuBtn = Instance.new("TextButton")
+local ToggleMenuBtn = Instance.new("ImageButton")
 ToggleMenuBtn.Name = "ToggleMenuBtn"
-ToggleMenuBtn.Size = UDim2.new(0, 55, 0, 55)
+ToggleMenuBtn.Size = UDim2.new(0, 54, 0, 54)
 ToggleMenuBtn.Position = UDim2.new(0.05, 0, 0.25, 0)
-ToggleMenuBtn.BackgroundColor3 = Color3.fromRGB(15, 15, 22)
+ToggleMenuBtn.BackgroundColor3 = Color3.fromRGB(18, 12, 26)
 ToggleMenuBtn.BackgroundTransparency = 0.1
-ToggleMenuBtn.Text = "👻"
-ToggleMenuBtn.TextSize = 28
+ToggleMenuBtn.Image = "rbxassetid://13886588647" -- Hình Con Ma Chibi Wibu xịn
+ToggleMenuBtn.ScaleType = Enum.ScaleType.Fit
+ToggleMenuBtn.AutoButtonColor = false -- Giữ nguyên không co giãn
 ToggleMenuBtn.Parent = ScreenGui
 
 local ToggleCorner = Instance.new("UICorner")
 ToggleCorner.CornerRadius = UDim.new(1, 0)
 ToggleCorner.Parent = ToggleMenuBtn
 
+-- Viền RGB phát sáng cho nút ma Wibu
 local ToggleStroke = Instance.new("UIStroke")
-ToggleStroke.Thickness = 3
+ToggleStroke.Thickness = 2.5
+ToggleStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 ToggleStroke.Parent = ToggleMenuBtn
+
+-- Padding nhẹ cho hình icon ma nằm gọn bên trong nút
+local TogglePadding = Instance.new("UIPadding")
+TogglePadding.PaddingBottom = UDim.new(0, 6)
+TogglePadding.PaddingTop = UDim.new(0, 6)
+TogglePadding.PaddingLeft = UDim.new(0, 6)
+TogglePadding.PaddingRight = UDim.new(0, 6)
+TogglePadding.Parent = ToggleMenuBtn
 
 -- =========================================================
 -- ANIMATIONS & LOGIC
@@ -277,19 +288,11 @@ end
 makeDraggable(MainFrame)
 makeDraggable(ToggleMenuBtn)
 
--- Toggle Menu Anim
+-- Toggle Menu
 local menuVisible = true
 ToggleMenuBtn.MouseButton1Click:Connect(function()
     menuVisible = not menuVisible
     MainFrame.Visible = menuVisible
-    
-    TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.12, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-        Size = UDim2.new(0, 45, 0, 45)
-    }):Play()
-    task.wait(0.12)
-    TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.12, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-        Size = UDim2.new(0, 55, 0, 55)
-    }):Play()
 end)
 
 -- LOGIC FULL LIGHT & SLIDER
@@ -342,12 +345,12 @@ local function setFullLightState(state)
     fullLightEnabled = state
     
     if fullLightEnabled then
-        TweenService:Create(SwitchBg, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(0, 240, 255)}):Play()
+        TweenService:Create(SwitchBg, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(255, 0, 150)}):Play()
         TweenService:Create(SwitchDot, TweenInfo.new(0.2), {
             Position = UDim2.new(1, -23, 0.5, -10),
             BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         }):Play()
-        TweenService:Create(CardStroke, TweenInfo.new(0.2), {Color = Color3.fromRGB(0, 240, 255)}):Play()
+        TweenService:Create(CardStroke, TweenInfo.new(0.2), {Color = Color3.fromRGB(255, 0, 180)}):Play()
         
         clearDarkEffects()
         forceFullBright()
@@ -363,12 +366,12 @@ local function setFullLightState(state)
             end
         end)
     else
-        TweenService:Create(SwitchBg, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(40, 40, 55)}):Play()
+        TweenService:Create(SwitchBg, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(45, 35, 60)}):Play()
         TweenService:Create(SwitchDot, TweenInfo.new(0.2), {
             Position = UDim2.new(0, 3, 0.5, -10),
-            BackgroundColor3 = Color3.fromRGB(150, 150, 170)
+            BackgroundColor3 = Color3.fromRGB(170, 150, 190)
         }):Play()
-        TweenService:Create(CardStroke, TweenInfo.new(0.2), {Color = Color3.fromRGB(50, 50, 75)}):Play()
+        TweenService:Create(CardStroke, TweenInfo.new(0.2), {Color = Color3.fromRGB(65, 45, 85)}):Play()
         
         if brightnessConn then brightnessConn:Disconnect() end
         if clockConn then clockConn:Disconnect() end
@@ -431,10 +434,11 @@ end)
 -- [[ 2. THÔNG BÁO HOÀN TẤT ]]
 pcall(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "★ MRGHOST HUB VIP ★",
-        Text = "Kích hoạt thành công! Giao diện Cyberpunk đã sẵn sàng.",
+        Title = "★ MRGHOST HUB WIBU VIP ★",
+        Text = "Đã cập nhật giao diện Ma Chibi Wibu thành công!",
         Duration = 5
     })
 end)
 
-print("[★ MRGHOST HUB ★] Loaded successfully with Cyberpunk VIP UI!")
+print("[★ MRGHOST HUB ★] Wibu Edition Loaded Successfully!")
+ 
