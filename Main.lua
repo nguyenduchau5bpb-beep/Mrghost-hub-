@@ -15,9 +15,9 @@ local success, err = pcall(function()
     -- Config Key System
     local CORRECT_KEY = "TTTT" -- Key hệ thống: TTTT
     local KEY_LINK = "https://discord.gg/KDTDZjYSR" -- Link Discord lấy key
-    local BACKUP_LINK = "https://fnote.net/notes/jv9G9J" -- Link Fnote dự phòng cho người không có Discord
+    local BACKUP_LINK = "https://fnote.net/notes/jv9G9J" -- Link Fnote dự phòng
     local CACHE_FILE = "MrGhostVIP_KeyCache.json"
-    local EXPIRE_TIME = 86400 -- 24 Tiếng tính bằng Giây (24 * 3600)
+    local EXPIRE_TIME = 86400 -- 24 Tiếng (24 * 3600)
 
     -- Container ScreenGui
     local ScreenGui = Instance.new("ScreenGui")
@@ -32,16 +32,20 @@ local success, err = pcall(function()
         return Color3.fromHSV(hue, 0.85, 1)
     end
 
-    -- Hàm Kéo Thả (Draggable)
-    local function makeDraggable(gui)
+    -- Hàm Kéo Thả (Draggable) Chuẩn Không Lỗi
+    local function makeDraggable(gui, onDragStart, onDragEnd)
         local dragging, dragInput, dragStart, startPos
         gui.InputBegan:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                 dragging = true
                 dragStart = input.Position
                 startPos = gui.Position
+                if onDragStart then onDragStart() end
                 input.Changed:Connect(function()
-                    if input.UserInputState == Enum.UserInputState.End then dragging = false end
+                    if input.UserInputState == Enum.UserInputState.End then 
+                        dragging = false 
+                        if onDragEnd then onDragEnd() end
+                    end
                 end)
             end
         end)
@@ -269,7 +273,7 @@ local success, err = pcall(function()
         SliderBtn.Text = ""
         SliderBtn.Parent = SliderFrame
 
-        -- FLOATING TOGGLE BUTTON (NÚT PHỤ 👻 NHẢY TƯNG TƯNG)
+        -- FLOATING TOGGLE BUTTON (NÚT PHỤ 👻 KHÔNG CÒN BỊ LỖI KÉO THẢ)
         local ToggleMenuBtn = Instance.new("TextButton")
         ToggleMenuBtn.Size = UDim2.new(0, 52, 0, 52)
         ToggleMenuBtn.Position = UDim2.new(0.05, 0, 0.25, 0)
@@ -289,29 +293,54 @@ local success, err = pcall(function()
         ToggleStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
         ToggleStroke.Parent = ToggleMenuBtn
 
+        -- LOGIC KÉO THẢ & HIỆU ỨNG NHÚN NHẢY ĐÃ FIX LỖI
+        local isDraggingToggle = false
+        makeDraggable(MainFrame)
+        makeDraggable(ToggleMenuBtn, function()
+            isDraggingToggle = true
+        end, function()
+            isDraggingToggle = false
+        end)
+
         task.spawn(function()
-            local basePos = ToggleMenuBtn.Position
             while task.wait() do
-                TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                    Position = UDim2.new(basePos.X.Scale, basePos.X.Offset, basePos.Y.Scale, basePos.Y.Offset - 10),
-                    Rotation = -12
-                }):Play()
-                task.wait(0.35)
-                TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.3, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
-                    Position = basePos,
-                    Rotation = 0
-                }):Play()
-                task.wait(0.3)
-                TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                    Position = UDim2.new(basePos.X.Scale, basePos.X.Offset, basePos.Y.Scale, basePos.Y.Offset - 10),
-                    Rotation = 12
-                }):Play()
-                task.wait(0.35)
-                TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.3, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
-                    Position = basePos,
-                    Rotation = 0
-                }):Play()
-                task.wait(0.5)
+                if not isDraggingToggle then
+                    local basePos = ToggleMenuBtn.Position
+                    local t1 = TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                        Position = UDim2.new(basePos.X.Scale, basePos.X.Offset, basePos.Y.Scale, basePos.Y.Offset - 8),
+                        Rotation = -12
+                    })
+                    t1:Play()
+                    t1.Completed:Wait()
+
+                    if not isDraggingToggle then
+                        local t2 = TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.3, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
+                            Position = basePos,
+                            Rotation = 0
+                        })
+                        t2:Play()
+                        t2.Completed:Wait()
+                    end
+
+                    if not isDraggingToggle then
+                        local t3 = TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                            Position = UDim2.new(basePos.X.Scale, basePos.X.Offset, basePos.Y.Scale, basePos.Y.Offset - 8),
+                            Rotation = 12
+                        })
+                        t3:Play()
+                        t3.Completed:Wait()
+                    end
+
+                    if not isDraggingToggle then
+                        local t4 = TweenService:Create(ToggleMenuBtn, TweenInfo.new(0.3, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
+                            Position = basePos,
+                            Rotation = 0
+                        })
+                        t4:Play()
+                        t4.Completed:Wait()
+                    end
+                end
+                task.wait(0.4)
             end
         end)
 
@@ -322,9 +351,6 @@ local success, err = pcall(function()
             ToggleStroke.Color = rainbowColor
             TitleGradient.Rotation = (tick() * 90) % 360
         end)
-
-        makeDraggable(MainFrame)
-        makeDraggable(ToggleMenuBtn)
 
         local menuVisible = true
         ToggleMenuBtn.MouseButton1Click:Connect(function()
@@ -342,7 +368,7 @@ local success, err = pcall(function()
             pcall(function()
                 Lighting.Brightness = currentBrightness
                 Lighting.ClockTime = 14
-                Lighting.FogEnd = 1e6
+                Lighting.FogEnd = 1000000
                 Lighting.GlobalShadows = false
                 Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
                 Lighting.Ambient = Color3.fromRGB(255, 255, 255)
@@ -422,16 +448,15 @@ local success, err = pcall(function()
     end
 
     -- =========================================================
-    -- GIAO DIỆN NHẬP KEY (KEY SYSTEM UI - MỞ RỘNG THÊM NÚT BACKUP)
+    -- GIAO DIỆN NHẬP KEY (KEY SYSTEM UI)
     -- =========================================================
     if isKeySavedValid() then
         loadMainHub()
     else
-        -- Tăng chiều cao khung Key lên một chút để vừa 3 nút
         local KeyFrame = Instance.new("Frame")
         KeyFrame.Name = "KeyFrame"
-        KeyFrame.Size = UDim2.new(0, 320, 0, 230)
-        KeyFrame.Position = UDim2.new(0.5, -160, 0.4, -115)
+        KeyFrame.Size = UDim2.new(0, 320, 0, 245)
+        KeyFrame.Position = UDim2.new(0.5, -160, 0.4, -122)
         KeyFrame.BackgroundColor3 = Color3.fromRGB(12, 10, 18)
         KeyFrame.Parent = ScreenGui
 
@@ -458,7 +483,7 @@ local success, err = pcall(function()
 
         local KeyTextBox = Instance.new("TextBox")
         KeyTextBox.Size = UDim2.new(1, -32, 0, 34)
-        KeyTextBox.Position = UDim2.new(0, 16, 0, 42)
+        KeyTextBox.Position = UDim2.new(0, 16, 0, 38)
         KeyTextBox.BackgroundColor3 = Color3.fromRGB(24, 20, 35)
         KeyTextBox.PlaceholderText = "Nhập Key VIP tại đây..."
         KeyTextBox.Text = ""
@@ -471,10 +496,21 @@ local success, err = pcall(function()
         BoxCorner.CornerRadius = UDim.new(0, 8)
         BoxCorner.Parent = KeyTextBox
 
+        -- DÒNG THÔNG BÁO KEY VĨNH VIỄN
+        local KeyNoteText = Instance.new("TextLabel")
+        KeyNoteText.Size = UDim2.new(1, -32, 0, 18)
+        KeyNoteText.Position = UDim2.new(0, 16, 0, 76)
+        KeyNoteText.BackgroundTransparency = 1
+        KeyNoteText.Text = "✨ Key vĩnh viễn (Get 1 lần duy nhất) ✨"
+        KeyNoteText.TextColor3 = Color3.fromRGB(0, 240, 255)
+        KeyNoteText.TextSize = 11
+        KeyNoteText.Font = Enum.Font.SourceSansBold
+        KeyNoteText.Parent = KeyFrame
+
         -- Button Check Key
         local CheckBtn = Instance.new("TextButton")
         CheckBtn.Size = UDim2.new(0.45, -4, 0, 34)
-        CheckBtn.Position = UDim2.new(0, 16, 0, 84)
+        CheckBtn.Position = UDim2.new(0, 16, 0, 98)
         CheckBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 120)
         CheckBtn.Text = "Check Key"
         CheckBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -489,7 +525,7 @@ local success, err = pcall(function()
         -- Button Get Discord Key
         local GetKeyBtn = Instance.new("TextButton")
         GetKeyBtn.Size = UDim2.new(0.45, -4, 0, 34)
-        GetKeyBtn.Position = UDim2.new(0.555, 0, 0, 84)
+        GetKeyBtn.Position = UDim2.new(0.555, 0, 0, 98)
         GetKeyBtn.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
         GetKeyBtn.Text = "Discord Key"
         GetKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -504,7 +540,7 @@ local success, err = pcall(function()
         -- Button Backup Link (Không có Discord dùng cái này)
         local BackupBtn = Instance.new("TextButton")
         BackupBtn.Size = UDim2.new(1, -32, 0, 32)
-        BackupBtn.Position = UDim2.new(0, 16, 0, 126)
+        BackupBtn.Position = UDim2.new(0, 16, 0, 140)
         BackupBtn.BackgroundColor3 = Color3.fromRGB(255, 140, 0)
         BackupBtn.Text = "🔗 Nếu ko có Discord dùng cái này"
         BackupBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -518,8 +554,8 @@ local success, err = pcall(function()
 
         -- Status Label
         local StatusText = Instance.new("TextLabel")
-        StatusText.Size = UDim2.new(1, -32, 0, 25)
-        StatusText.Position = UDim2.new(0, 16, 0, 168)
+        StatusText.Size = UDim2.new(1, -32, 0, 22)
+        StatusText.Position = UDim2.new(0, 16, 0, 182)
         StatusText.BackgroundTransparency = 1
         StatusText.Text = "Chọn hình thức lấy key để tiếp tục"
         StatusText.TextColor3 = Color3.fromRGB(180, 180, 180)
